@@ -1,0 +1,33 @@
+services:
+  backend1:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      INSTANCE_ID: "1"
+
+  backend2:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      INSTANCE_ID: "2"
+  backend3:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      INSTANCE_ID: "3"
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+    - ./nginx/statics:/statics
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
