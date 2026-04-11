@@ -1,4 +1,4 @@
-ARG NGINX_VERSION
+ARG NGINX_VERSION="1.29"
 FROM scratch AS builder
 COPY ./statics /statics
 
