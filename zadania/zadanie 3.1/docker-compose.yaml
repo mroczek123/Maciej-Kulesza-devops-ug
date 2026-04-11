@@ -12,7 +12,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
-    volumes:
-    - ./nginx/statics:/statics
     depends_on:
       - backend
