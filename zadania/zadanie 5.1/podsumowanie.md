@@ -19,7 +19,7 @@ Backend:
 - docker run --volume=items-data:/data --network=back-net --name backend3 -e INSTANCE_ID=3 -d localhost:5000/backend:latest
 
 Test izolacji front-net
-- docker run --network=front-net --name frontcontainer alpine:latest
+- docker run --network=front-net alpine:latest ping -c 2 backend1:3000
 
 Nginx:
 - cd nginx
