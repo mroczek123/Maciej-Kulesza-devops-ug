@@ -1,0 +1,44 @@
+services:
+  backend1: &backend-service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - items-data:/data
+    environment:
+      INSTANCE_ID: "1"
+    networks:
+      - back-net
+
+  backend2: 
+    <<: *backend-service
+    environment:
+      INSTANCE_ID: "2"
+
+  backend3:
+    <<: *backend-service
+    environment:
+      INSTANCE_ID: "3"
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    networks:
+      - back-net
+      - front-net
+
+volumes:
+  items-data:
+
+networks:
+  front-net:
+    driver: bridge
+  back-net:
+    driver: bridge

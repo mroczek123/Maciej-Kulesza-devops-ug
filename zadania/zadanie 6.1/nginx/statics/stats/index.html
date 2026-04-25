@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Statystyki</title>
+</head>
+
+<body>
+    Stats
+    <div>
+        Liczba produktów: <span id="productsAmount"></span>
+    </div>
+    <div>
+        Id instancji <span id="instanceId"></span>
+    </div>
+    <script>
+        fetch("/api/stats").then(async result => {
+            const response = await result.json();
+            document.getElementById("productsAmount").innerHTML = response["productsAmount"];
+            document.getElementById("instanceId").innerHTML = response["instanceId"];
+        })
+    </script>
+
+</body>
+
+</html>
